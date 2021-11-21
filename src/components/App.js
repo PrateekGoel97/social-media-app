@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Link, Route , Routes} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { fetchPosts } from '../actions/posts';
-import { Navbar , Home,  Page404, Login} from './';
+import { Navbar , Home,  Page404, Login , Signup} from './';
 
 
 
@@ -23,6 +23,7 @@ class App extends React.Component {
           <Routes>
           <Route  path='/' element={<Home posts={posts} />} />
           <Route path='/Login' element ={<Login />} />
+          <Route path='/Signup' element ={<Signup />} />
           <Route path='/*' element={<Page404 />} />
 
           </Routes>

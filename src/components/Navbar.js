@@ -15,7 +15,7 @@ function Navbar(props){
           <div className="search-container">
             <img
               className="search-icon"
-              src="https://image.flaticon.com/icons/svg/483/483356.svg"
+              src="https://cdn-icons.flaticon.com/png/512/2811/premium/2811806.png?token=exp=1636805715~hmac=0ac86d84f8b57385fad705ae38a83daf"
               alt="search-icon"
             />
             <input placeholder="Search" />
@@ -42,7 +42,7 @@ function Navbar(props){
           <div className="right-nav">
             <div className="user">
               <img
-                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
                 alt="user-dp"
                 id="user-dp"
               />
@@ -56,8 +56,11 @@ function Navbar(props){
                   </Link>
                 </li>
                 
-                <li>Log out</li>
-                <li>Register</li>
+                <li>
+                <Link to='/Signup' >
+                  Register
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

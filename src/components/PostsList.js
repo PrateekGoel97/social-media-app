@@ -11,7 +11,7 @@ class PostsList extends Component {
             <div className="post-header">
               <div className="post-avatar">
                 <img
-                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
                   alt="user-pic"
                 />
                 <div>
@@ -27,7 +27,7 @@ class PostsList extends Component {
                     src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
                     alt="likes-icon"
                   />
-                  <span>{post.like.length}</span>
+                  <span>{post.likes.length}</span>
                 </div>
 
                 <div className="post-comments-icon">
