@@ -1,5 +1,5 @@
 import { APIUrls } from "../helpers/urls";
-import { LOGIN_FAILED, LOGIN_START, LOGIN_SUCCESS, SIGNUP_FAILED, SIGNUP_START, SIGNUP_SUCCESS } from "./actionTypes";
+import { AUTHENTICATE_USER, LOGIN_FAILED, LOGIN_START, LOGIN_SUCCESS, LOGOUT, SIGNUP_FAILED, SIGNUP_START, SIGNUP_SUCCESS } from "./actionTypes";
 import { getFormBody } from "../helpers/utils";
 
 
@@ -41,6 +41,8 @@ export function login(email,password){
         console.log(data);
         
         if(data.success){
+
+            localStorage.setItem('token',data.data.token);
             dispatch(loginSuccess(data.data.user));
             return;
         }
@@ -52,6 +54,20 @@ export function login(email,password){
     }
 }
 
+// authentication
+
+export function authenticateUser(user){
+    return {
+        type:AUTHENTICATE_USER,
+        user
+    }
+}
+
+export function logoutUser(){
+    return {
+        type:LOGOUT
+    }
+}
 
 
 // signup actions
