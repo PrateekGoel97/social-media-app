@@ -15,7 +15,7 @@ function Navbar(props){
           <div className="search-container">
             <img
               className="search-icon"
-              src="https://cdn-icons.flaticon.com/png/512/2811/premium/2811806.png?token=exp=1636805715~hmac=0ac86d84f8b57385fad705ae38a83daf"
+              src="https://cdn-icons.flaticon.com/png/512/3031/premium/3031293.png?token=exp=1637486081~hmac=c490403dd0c8b69c0fc986e5e3c4ad6c"
               alt="search-icon"
             />
             <input placeholder="Search" />
