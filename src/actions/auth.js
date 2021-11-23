@@ -1,5 +1,5 @@
 import { APIUrls } from "../helpers/urls";
-import { AUTHENTICATE_USER, LOGIN_FAILED, LOGIN_START, LOGIN_SUCCESS, LOGOUT, SIGNUP_FAILED, SIGNUP_START, SIGNUP_SUCCESS } from "./actionTypes";
+import { AUTHENTICATE_USER, CLEAR_AUTH_STATE, LOGIN_FAILED, LOGIN_START, LOGIN_SUCCESS, LOGOUT, SIGNUP_FAILED, SIGNUP_START, SIGNUP_SUCCESS } from "./actionTypes";
 import { getFormBody } from "../helpers/utils";
 
 
@@ -69,6 +69,11 @@ export function logoutUser(){
     }
 }
 
+export function clearAuthentication(){
+    return {
+        type:CLEAR_AUTH_STATE
+    }
+}
 
 // signup actions
 

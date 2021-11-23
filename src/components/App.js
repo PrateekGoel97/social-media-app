@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {BrowserRouter as Router, Link, Route , Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route , Routes , Navigate} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import  jwtDecode from 'jwt-decode';
 
@@ -8,7 +8,18 @@ import { fetchPosts } from '../actions/posts';
 import { Navbar , Home,  Page404, Login , Signup} from './';
 import { authenticateUser } from '../actions/auth';
 
+const Settings = () => <div>Settings</div>
 
+const PrivateRoute = (PrivateRouteProps) =>{
+
+  const {isLoggedin,component : Component} = PrivateRouteProps;
+
+    if(isLoggedin){
+      return <Component />
+    }
+    else
+      return <Navigate to = '/Login' />
+}
 
 class App extends React.Component {
   componentDidMount() {
@@ -32,7 +43,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { posts } = this.props;
+    const { posts, auth} = this.props;
     return (
       <Router>
         <div>
@@ -42,6 +53,7 @@ class App extends React.Component {
           <Route  path='/' element={<Home posts={posts} />} />
           <Route path='/Login' element ={<Login />} />
           <Route path='/Signup' element ={<Signup />} />
+          <Route path='/Settings'  element={<PrivateRoute component={Settings} isLoggedin={auth.isLoggedin}/>}  />
           <Route path='/*' element={<Page404 />} />
 
           </Routes>
@@ -60,6 +72,7 @@ App.propTypes ={
 function mapStateToProps(state) {
   return {
     posts: state.posts,
+    auth:state.auth
   };
 }
 const AppComponent = connect(mapStateToProps)(App)

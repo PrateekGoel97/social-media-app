@@ -1,6 +1,7 @@
 import React from 'react';
-import {login, startLogin} from '../actions/auth';
+import {clearAuthentication, login, startLogin} from '../actions/auth';
 import {connect} from 'react-redux';
+import {Navigate} from 'react-router-dom';
 
 class Login extends React.Component{
 
@@ -14,6 +15,10 @@ class Login extends React.Component{
             email:'',
             password:''
         }
+    }
+
+    componentWillUnmount(){
+        this.props.dispatch(clearAuthentication());
     }
 
     // handleFormSubmit = (e) =>{
@@ -49,6 +54,10 @@ class Login extends React.Component{
     render(){
 
         const {error,isLoggedin,inProgress} =  this.props.auth;
+
+        if(isLoggedin){
+            return <Navigate to='/'></Navigate>
+        }
 
         return(
         <form className="login-form">

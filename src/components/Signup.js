@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {signup, signupStart} from '../actions/auth';
+import {signup, signupStart , clearAuthentication} from '../actions/auth';
+import {Navigate} from 'react-router-dom';
 
 class Signup extends React.Component{
 
@@ -15,6 +16,11 @@ class Signup extends React.Component{
          confirmPassword:''
       }
    }
+
+   
+   componentWillUnmount(){
+      this.props.dispatch(clearAuthentication());
+  }
 
 handleName = (e) =>{
 
@@ -64,6 +70,10 @@ handleConfirmPassword = (e) =>{
  render(){
 
    const {error,inProgress,isLoggedin} = this.props.auth;
+
+   if(isLoggedin){
+      return <Navigate to='/'></Navigate>
+  }
 
    return(
    <form className="login-form">
