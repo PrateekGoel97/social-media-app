@@ -11,6 +11,6 @@ export function getFormBody(params){
 
         formBody.push(encodedKey+ '=' + encodedValue);
     }
-
+    
     return formBody.join('&');
 }

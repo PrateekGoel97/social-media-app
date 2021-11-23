@@ -3,6 +3,8 @@ import {clearAuthentication, login, startLogin} from '../actions/auth';
 import {connect} from 'react-redux';
 import {Navigate} from 'react-router-dom';
 
+
+
 class Login extends React.Component{
 
     constructor(props){
@@ -54,9 +56,10 @@ class Login extends React.Component{
     render(){
 
         const {error,isLoggedin,inProgress} =  this.props.auth;
-
+    
+        
         if(isLoggedin){
-            return <Navigate to='/'></Navigate>
+            return <Navigate to='./'></Navigate>
         }
 
         return(
@@ -103,6 +106,5 @@ function mapStateToProps(state) {
     };
   }
 
-  const LoginComponent = connect(mapStateToProps)(Login)
+  export default  connect(mapStateToProps)(Login);
 
-export default LoginComponent;
