@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {BrowserRouter as Router, Link, Route , Routes , Navigate} from 'react-router-dom';
+import {BrowserRouter as Router,  Route , Routes , Navigate} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import  jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../actions/posts';
 import { Navbar , Home,  Page404, Login , Signup, Settings} from './';
 import { authenticateUser } from '../actions/auth';
+import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 
 
-
+/*
 const PrivateRoute = (PrivateRouteProps) =>{
 
   const {isLoggedin,component : Component} = PrivateRouteProps;
@@ -18,14 +19,19 @@ const PrivateRoute = (PrivateRouteProps) =>{
       return <Component />
     }
     else
-      return <Navigate to = '/Login' />
+      return <Navigate to = {{
+        pathname:'/Login',
+        state: {
+          from : 
+        }
+      } }/>
 }
 
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
 
-    const token = localStorage.getItem('token');
+    const token = getAuthTokenFromLocalStorage();
 
     if(token){
       const user = jwtDecode(token);
@@ -62,6 +68,83 @@ class App extends React.Component {
       </Router>
     );
   }
+}
+
+App.propTypes ={
+  posts : PropTypes.array.isRequired
+}
+
+
+function mapStateToProps(state) {
+  return {
+    posts: state.posts,
+    auth:state.auth
+  };
+}
+const AppComponent = connect(mapStateToProps)(App)
+export default AppComponent;
+*/
+
+
+
+
+const App = (props) =>{
+
+
+
+  const PrivateRoute = (PrivateRouteProps) =>{
+
+    const {isLoggedin,component : Component} = PrivateRouteProps;
+
+
+      if(isLoggedin){
+        return <Component />
+      }
+      else
+        return <Navigate to = '/'/>
+  }
+
+  useEffect(() => {
+
+    props.dispatch(fetchPosts());
+
+    const token = getAuthTokenFromLocalStorage();
+
+    if(token){
+      const user = jwtDecode(token);
+
+      console.log('user',user);
+
+      this.props.dispatch(
+          authenticateUser({
+          email:user.email,
+          _id:user._id,
+          name:user.name
+        })
+      );
+    }
+
+  },[])
+
+  const { posts, auth} = props;
+return (
+    <Router>
+      <div>
+        <Navbar />
+        
+        <Routes>
+        <Route  path='/' element={<Home posts={posts} />} />
+        <Route path='/Login' element ={<Login />} />
+        <Route path='/Signup' element ={<Signup />} />
+        <Route path='/Settings'  element={<PrivateRoute component={Settings} isLoggedin={auth.isLoggedin}/>}  />
+        <Route path='/*' element={<Page404 />} />
+
+        </Routes>
+      
+      </div>
+    </Router>
+);
+
 }
 
 App.propTypes ={
