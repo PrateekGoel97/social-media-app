@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import {BrowserRouter as Router,  Route , Routes , Navigate} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import  jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../actions/posts';
-import { Navbar , Home,  Page404, Login , Signup, Settings} from './';
+import { Navbar , Home,  Page404, Login , Signup, Settings,UserProfile} from './';
 import { authenticateUser } from '../actions/auth';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
+import { fetchUserFriends } from '../actions/friends';
 
 
-/*
+
 const PrivateRoute = (PrivateRouteProps) =>{
 
   const {isLoggedin,component : Component} = PrivateRouteProps;
@@ -19,12 +20,7 @@ const PrivateRoute = (PrivateRouteProps) =>{
       return <Component />
     }
     else
-      return <Navigate to = {{
-        pathname:'/Login',
-        state: {
-          from : 
-        }
-      } }/>
+      return <Navigate to ='/Login'/>
 }
 
 class App extends React.Component {
@@ -45,21 +41,26 @@ class App extends React.Component {
           name:user.name
         })
       );
+
+      this.props.dispatch(fetchUserFriends());
     }
   }
 
   render() {
-    const { posts, auth} = this.props;
+    const { posts, auth, friends} = this.props;
     return (
       <Router>
         <div>
           <Navbar />
           
           <Routes>
-          <Route  path='/' element={<Home posts={posts} />} />
+          <Route  path='/' element={<Home posts={posts} friends={friends} isLoggedin={auth.isLoggedin}/>} />
           <Route path='/Login' element ={<Login />} />
           <Route path='/Signup' element ={<Signup />} />
           <Route path='/Settings'  element={<PrivateRoute component={Settings} isLoggedin={auth.isLoggedin}/>}  />
+          <Route path='/User'>
+                <Route path=':userId' element={<PrivateRoute component={UserProfile} isLoggedin={auth.isLoggedin}/>} />
+          </Route>
           <Route path='/*' element={<Page404 />} />
 
           </Routes>
@@ -78,15 +79,16 @@ App.propTypes ={
 function mapStateToProps(state) {
   return {
     posts: state.posts,
-    auth:state.auth
+    auth:state.auth,
+    friends:state.friends
   };
 }
 const AppComponent = connect(mapStateToProps)(App)
 export default AppComponent;
-*/
 
 
 
+/*
 
 const App = (props) =>{
 
@@ -160,3 +162,4 @@ function mapStateToProps(state) {
 }
 const AppComponent = connect(mapStateToProps)(App)
 export default AppComponent;
+*/

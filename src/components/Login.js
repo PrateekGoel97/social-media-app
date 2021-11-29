@@ -1,10 +1,9 @@
-import React,{ useEffect, useState } from 'react';
+import React from 'react';
 import {clearAuthentication, login, startLogin} from '../actions/auth';
 import {connect} from 'react-redux';
 import {Navigate} from 'react-router-dom';
 
 
-/*
 class Login extends React.Component{
 
     constructor(props){
@@ -110,9 +109,9 @@ function mapStateToProps(state) {
 
   export default LoginComponent;
 
-*/
 
 
+/*
 const Login = (props) =>{
 
    // console.log('props',props);
@@ -193,14 +192,6 @@ const Login = (props) =>{
             </div>
       </form> 
       );
-}
-
-function mapStateToProps(state) {
-    return {
-      auth: state.auth
-    };
-  }
-
-  export default connect(mapStateToProps)(Login);
+}*/
 
  
