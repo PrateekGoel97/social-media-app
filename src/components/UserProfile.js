@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { useParams } from 'react-router';
+import { Navigate, useParams } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchUserProfile } from '../actions/profile';
 import { APIUrls } from '../helpers/urls';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 import { addFriend, removeFriend} from '../actions/friends';
+
 
 const UserProfileWrapper = (props) =>{
 
@@ -30,6 +31,11 @@ class UserProfile extends Component {
   componentDidMount(){
 
     console.log('profile',this.props.props.profile);
+
+    // if(this.props.userId === this.props.props.auth.user._id ){
+    //   <Navigate to='/Settings' />
+    // }
+
     this.props.props.dispatch(fetchUserProfile(this.props.userId));
     
   }
@@ -123,9 +129,16 @@ class UserProfile extends Component {
    const {error,success,successMessage} = this.state;
 
    console.log('inside render inprogress',inProgress);
+
+    if(this.props.userId === this.props.props.auth.user._id ){
+      return <Navigate to='/Settings' />
+    }
+    else
+
      if(inProgress){
        return <h2>Loading...</h2>
      }
+     else
 
     return (
       <div className="settings">
@@ -168,7 +181,8 @@ class UserProfile extends Component {
 function mapStateToProps(state) {
   return {
     profile:state.profile,
-    friends:state.friends
+    friends:state.friends,
+    auth:state.auth
   };
 }
 
