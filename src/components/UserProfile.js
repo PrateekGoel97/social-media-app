@@ -10,6 +10,7 @@ import { addFriend, removeFriend} from '../actions/friends';
 const UserProfileWrapper = (props) =>{
 
   const {userId} = useParams();
+  
   return (
       <UserProfile userId={userId} props={props}/>
   );
@@ -30,15 +31,27 @@ class UserProfile extends Component {
 
   componentDidMount(){
 
-    console.log('profile',this.props.props.profile);
+    console.log('profile',this.props.userId);
 
-    // if(this.props.userId === this.props.props.auth.user._id ){
-    //   <Navigate to='/Settings' />
-    // }
+    console.log('params',this.props.params);
 
     this.props.props.dispatch(fetchUserProfile(this.props.userId));
     
   }
+
+  componentDidUpdate(prevProps) {
+
+    // console.log(prevProps);
+
+    // console.log('current',this.props);
+
+    if(prevProps.userId !== this.props.userId){
+      this.props.props.dispatch(fetchUserProfile(this.props.userId));
+    }
+
+  }
+
+
 
   checkIfUserIsAFriend(){
 
@@ -145,7 +158,7 @@ class UserProfile extends Component {
       
         <div className="img-container">
           <img
-            src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
             alt="user-dp"
           />
         </div>
