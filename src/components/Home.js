@@ -1,5 +1,5 @@
 import React from 'react';
-import {PostsList,FriendsList} from './';
+import {PostsList,FriendsList, Welcome} from './';
 
 
 class Home extends React.Component{
@@ -9,7 +9,7 @@ class Home extends React.Component{
             
 
             if(!isLoggedin){
-                return <h1>Welcome to Codeial</h1>
+                return <Welcome />
             }
 
         return(

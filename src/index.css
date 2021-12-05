@@ -519,3 +519,48 @@ nav .nav-links ul li:hover {
 #add-post-btn:hover {
   cursor: pointer;
 }
+
+
+/* Welcome*/
+
+.welcome {
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  height: 60%;
+  margin: 50px auto;
+  border-radius: 6px;
+}
+
+.welcome-header {
+  font-weight: 600;
+  font-size: 30px;
+  color: #ef7917;
+}
+
+.welcome-image img{
+  height: 100%;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.welcome-button button{
+  width: 100%;
+  margin-top: 20px;
+  background: #ef7917;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 20px;
+  padding: 9px;
+  border: none;
+  outline: none;
+}
+.welcome-button button:hover {
+  cursor: pointer;
+}
+
