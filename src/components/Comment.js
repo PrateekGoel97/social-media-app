@@ -10,6 +10,16 @@ function Comment(props) {
      props.dispatch(destroyComment(postId,comment._id));
   }
 
+  const handleTime = () =>{
+
+    const createdAt = comment.createdAt;
+
+    let s = new Date(createdAt).toDateString();
+    let t = new Date(createdAt).toLocaleTimeString();
+
+    return s+" "+t;
+  }
+
  const {comment,postId,auth} = props;
   return (
     <div className="post-comment-item">
@@ -17,7 +27,7 @@ function Comment(props) {
 
         <div>
         <span className="post-comment-author">{comment.user.name}</span>
-        <span className="post-comment-time">{comment.createdAt}</span>
+        <span className="post-comment-time">{handleTime()}</span>
         </div>
       
       <div>

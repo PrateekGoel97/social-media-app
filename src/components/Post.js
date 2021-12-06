@@ -42,6 +42,18 @@ class Post extends Component {
 
   }
 
+  handleTime = () =>{
+
+    const{post} = this.props;
+
+    const createdAt = post.createdAt;
+
+    let s = new Date(createdAt).toDateString();
+    let t = new Date(createdAt).toLocaleTimeString();
+
+    return s+" "+t;
+  }
+
   render() {
     const { post,auth } = this.props;
     const { comment } = this.state;
@@ -60,7 +72,7 @@ class Post extends Component {
             </Link>
             <div>
               <span className="post-author">{post.user.name}</span>
-              <span className="post-time">{post.createdAt}</span>
+              <span className="post-time">{this.handleTime()}</span>
             </div>
           </div>
           <div className="post-content">{post.content}</div>

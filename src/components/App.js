@@ -2,13 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {BrowserRouter as Router,  Route , Routes , Navigate} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import  jwtDecode from 'jwt-decode';
 
-import { fetchPosts } from '../actions/posts';
 import { Navbar , Home,  Page404, Login , Signup, Settings,UserProfile} from './';
-import { authenticateUser } from '../actions/auth';
-import { getAuthTokenFromLocalStorage } from '../helpers/utils';
-import { fetchUserFriends } from '../actions/friends';
+
 
 
 
@@ -24,27 +20,28 @@ const PrivateRoute = (PrivateRouteProps) =>{
 }
 
 class App extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(fetchPosts());
+  // componentDidMount() {
+  //   this.props.dispatch(fetchPosts());
+  //   this.props.dispatch(fetchUserFriends());
 
-    const token = getAuthTokenFromLocalStorage();
+  //   const token = getAuthTokenFromLocalStorage();
 
-    if(token){
-      const user = jwtDecode(token);
+  //   if(token){
+  //     const user = jwtDecode(token);
 
-      console.log('user',user);
+  //     console.log('user',user);
 
-      this.props.dispatch(
-          authenticateUser({
-          email:user.email,
-          _id:user._id,
-          name:user.name
-        })
-      );
+  //     this.props.dispatch(
+  //         authenticateUser({
+  //         email:user.email,
+  //         _id:user._id,
+  //         name:user.name
+  //       })
+  //     );
 
-      this.props.dispatch(fetchUserFriends());
-    }
-  }
+      
+  //   }
+  // }
 
   render() {
     const { posts, auth, friends} = this.props;
@@ -54,7 +51,7 @@ class App extends React.Component {
           <Navbar />
           
           <Routes>
-          <Route  path='/' element={<Home posts={posts} friends={friends} isLoggedin={auth.isLoggedin}/>} />
+          <Route  path='/' element={<Home posts={posts} friends={friends} isLoggedin={auth.isLoggedin} dispatch={this.props.dispatch}/>} />
           <Route path='/Login' element ={<Login />} />
           <Route path='/Signup' element ={<Signup />} />
           <Route path='/Settings'  element={<PrivateRoute component={Settings} isLoggedin={auth.isLoggedin}/>}  />
