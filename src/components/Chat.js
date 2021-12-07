@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {io} from 'socket.io-client';
+import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import '../chat.css';
 
@@ -7,14 +7,21 @@ class Chat extends Component {
   constructor(props) {
     super(props);
 
+    
     this.state = {
       messages: [], // {content: 'some message', self: true}
       typedMessage: '',
+      msgEmail:'',
+      hideChat:false
     };
-    this.socket = io('http://codeial.codingninjas.com:5000');
-    console.log('this.socket',this.socket);
-    this.userEmail = props.user.email;
 
+    this.socket = io('http://codeial.codingninjas.com:5000');
+    //console.log('this.socket',this.socket);
+    this.userEmail = props.user.email;
+  }
+
+  componentDidMount(){
+    
     if (this.userEmail) {
       this.setupConnections();
     }
@@ -24,10 +31,9 @@ class Chat extends Component {
     const socketConnection = this.socket;
     const self = this;
 
-    console.log('this',this);
-    console.log('self',self);
 
     this.socket.on('connect', function () {
+
       console.log('CONNECTION ESTABLISHED');
 
       socketConnection.emit('join_room', {
@@ -46,13 +52,17 @@ class Chat extends Component {
       const messageObject = {};
       messageObject.content = data.message;
 
+      //console.log('data inside receive msg',data);
+
       if (data.user_email === self.userEmail) {
         messageObject.self = true;
       }
+      
 
       self.setState({
         messages: [...messages, messageObject],
         typedMessage: '',
+        msgEmail: data.user_email
       });
     });
   };
@@ -69,20 +79,38 @@ class Chat extends Component {
     }
   };
 
+  handleHide = () => {
+    const val = !this.state.hideChat;
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        hideChat: val,
+      };
+    });
+  };
+
   render() {
-    const { typedMessage, messages } = this.state;
+    const { typedMessage, messages , msgEmail, hideChat} = this.state;
+    console.log('messages',messages);
 
     return (
-      <div className="chat-container">
+
+      
+      <div className={hideChat ? 'chat-container chat-down' : 'chat-container'}>
+
         <div className="chat-header">
           Chat
           <img
-            src=""
+            src="https://image.flaticon.com/icons/png/512/992/992683.png"
             alt=""
             height={17}
+            onClick={this.handleHide}
           />
         </div>
-        <div className="chat-messages">
+
+        {!hideChat && (<>
+
+          <div className="chat-messages">
           {messages.map((message) => (
             <div
               className={
@@ -90,19 +118,33 @@ class Chat extends Component {
                   ? 'chat-bubble self-chat'
                   : 'chat-bubble other-chat'
               }
+              
             >
               {message.content}
+
+              <div className="chat-user">
+              <small>{message.self ? (this.props.user.email) : (msgEmail) }</small>
+              </div> 
             </div>
           ))}
-        </div>
-        <div className="chat-footer">
+
+          </div>
+
+          <div className="chat-footer">
           <input
             type="text"
+            placeholder="Start Typing.."
             value={typedMessage}
             onChange={(e) => this.setState({ typedMessage: e.target.value })}
           />
           <button onClick={this.handleSubmit}>Submit</button>
-        </div>
+          </div>
+
+          </>
+        )}
+
+
+        
       </div>
     );
   }

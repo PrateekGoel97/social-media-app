@@ -53,7 +53,7 @@ export function createPost(content){
       .then(res => res.json())
       .then(data => {
 
-        console.log(data);
+        //console.log(data);
 
         if(data.success){
             dispatch(addPost(data.data.post));
@@ -107,7 +107,7 @@ export function createComment(content, postId) {
         .then(res => res.json())
         .then(data => {
 
-            console.log('Like data',data);
+         //   console.log('Like data',data);
 
             if(data.success){
                 dispatch(addLikeToStore(id,userId));
@@ -142,7 +142,7 @@ export function destroyComment(postId,commentId) {
       .then((response) => response.json())
       .then((data) => {
 
-        console.log('delete data',data);
+       // console.log('delete data',data);
 
         if (data.success) {
           dispatch(deleteComment(postId,commentId));

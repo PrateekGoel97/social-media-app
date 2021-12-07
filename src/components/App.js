@@ -7,7 +7,6 @@ import { Navbar , Home,  Page404, Login , Signup, Settings,UserProfile} from './
 
 
 
-
 const PrivateRoute = (PrivateRouteProps) =>{
 
   const {isLoggedin,component : Component} = PrivateRouteProps;
@@ -16,41 +15,21 @@ const PrivateRoute = (PrivateRouteProps) =>{
       return <Component />
     }
     else
-      return <Navigate to ='/Login'/>
+      return <Navigate to ='/'/>
 }
 
 class App extends React.Component {
-  // componentDidMount() {
-  //   this.props.dispatch(fetchPosts());
-  //   this.props.dispatch(fetchUserFriends());
-
-  //   const token = getAuthTokenFromLocalStorage();
-
-  //   if(token){
-  //     const user = jwtDecode(token);
-
-  //     console.log('user',user);
-
-  //     this.props.dispatch(
-  //         authenticateUser({
-  //         email:user.email,
-  //         _id:user._id,
-  //         name:user.name
-  //       })
-  //     );
-
-      
-  //   }
-  // }
 
   render() {
     const { posts, auth, friends} = this.props;
+    
     return (
       <Router>
         <div>
           <Navbar />
           
           <Routes>
+            
           <Route  path='/' element={<Home posts={posts} friends={friends} isLoggedin={auth.isLoggedin} dispatch={this.props.dispatch}/>} />
           <Route path='/Login' element ={<Login />} />
           <Route path='/Signup' element ={<Signup />} />

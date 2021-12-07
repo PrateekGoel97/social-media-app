@@ -1,10 +1,19 @@
 .chat-container {
   position: fixed;
-  height: 400px;
   width: 300px;
   bottom: 0;
   right: 10px;
 }
+
+.chat-down{
+  padding: 2px;
+  bottom: -1px;
+  box-sizing: border-box;
+  height: 43px;
+
+}
+
+
 .chat-header {
   font-size: 20px;
   padding: 10px;
@@ -67,6 +76,14 @@
   margin-top: -1px;
   margin-right: -10px;
 }
+
+.chat-user{
+  text-align: right;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+
 .chat-footer {
   height: 37px;
   box-sizing: border-box;
@@ -75,7 +92,7 @@
 .chat-footer input {
   width: 100%;
   outline: none;
-  font-size: 18px;
+  font-size: 15px;
   padding-left: 5px;
 }
 .chat-footer button {

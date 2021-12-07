@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import img from '../images/social1.svg';
 
-function Welcome (){
+
+function Welcome (props){
 
     return (
         <div className="welcome">

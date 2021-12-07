@@ -40,7 +40,7 @@ export function fetchUserProfile(userId){
         .then(data =>{
 
             if(data.success){
-                console.log('user profile data',data.data.user);
+               // console.log('user profile data',data.data.user);
                 dispatch(userProfileSuccess(data.data.user));
                 return;
             }

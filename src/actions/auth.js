@@ -38,7 +38,7 @@ export function login(email,password){
         .then(res => res.json())
         .then((data) => {
 
-        console.log(data);
+        //console.log('login data',data);
         
         if(data.success){
 
@@ -117,9 +117,10 @@ export function signup(name,email,password,confirmPassword){
         .then(res => res.json())
         .then(data =>{
 
-            console.log(data);
+           // console.log('signup data',data);
 
             if(data.success){
+                localStorage.setItem('token',data.data.token);
                 dispatch(signupSuccess(data.data.user));
                 return;
             }
@@ -160,7 +161,7 @@ export function editUser(name,password,confirmPassword,userId){
         .then(res => res.json())
         .then(data =>{
 
-            console.log('Editprofilr',data);
+           // console.log('Editprofilr',data);
             if(data.success){
                 dispatch(editUserSuccessful(data.data.user));
 

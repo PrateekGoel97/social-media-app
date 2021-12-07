@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import { Comment } from './';
 import { createComment,addLike } from '../actions/posts';
 
+
+
+
+
 class Post extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +17,11 @@ class Post extends Component {
       comment: '',
     };
   }
+  
+ 
+
+
+
   handleAddComment = (e) => {
     const { comment } = this.state;
     const { post } = this.props;

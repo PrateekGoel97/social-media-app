@@ -18,7 +18,7 @@ export function searchUsers(searchText){
         .then(res => res.json())
         .then(data => {
 
-            console.log('search data',data);
+          //  console.log('search data',data);
 
             if(data.success){
                 dispatch(searchResultSuccess(data.data.users));
