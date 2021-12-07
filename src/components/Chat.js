@@ -15,7 +15,7 @@ class Chat extends Component {
       hideChat:false
     };
 
-    this.socket = io('http://codeial.codingninjas.com:5000');
+    this.socket = io('https://codeial.codingninjas.com:5000');
     //console.log('this.socket',this.socket);
     this.userEmail = props.user.email;
   }
