@@ -1,6 +1,5 @@
 import React from 'react';
 import {PostsList,FriendsList, Welcome} from './';
-import Chat from './Chat';
 import { fetchPosts } from '../actions/posts';
 import { authenticateUser } from '../actions/auth';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
@@ -48,7 +47,6 @@ class Home extends React.Component{
             <div className='home'>
                 <PostsList posts={posts} />
                 {isLoggedin && <FriendsList friends={friends} />}
-                {isLoggedin && <Chat />}
             </div>
         )
     }

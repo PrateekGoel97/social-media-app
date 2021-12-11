@@ -13,7 +13,7 @@ import CreatePost from './CreatePost';
 import Post from './Post';
 import Comment from './Comment';
 import Welcome from './Welcome';
-import Chat from './Chat';
 
 
-export { PostsList, App , Navbar, Home, Page404, Login , Signup, Settings, UserProfile, FriendsList, FriendsListItem, CreatePost,Post, Comment, Welcome, Chat};
+
+export { PostsList, App , Navbar, Home, Page404, Login , Signup, Settings, UserProfile, FriendsList, FriendsListItem, CreatePost,Post, Comment, Welcome};
