@@ -1,0 +1,1 @@
+/api/* http://codeial.codingninjas.com:5000/api/v2/:splat 200
