@@ -1,4 +1,4 @@
-const API_ROOT = 'http://codeial.codingninjas.com:5000/api/v2';
+const API_ROOT = `/api/`;
 
 export const APIUrls = {
     login: () => `${API_ROOT}/users/login`,
